@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "MACSI World Cup Sweepstake",
+    "section": "",
+    "text": "The MACSI World Cup Sweepstake is now live!\nOnce the tournament has started, the standings tab will be updated (shortly after every game)."
+  },
+  {
+    "objectID": "papers.html",
+    "href": "papers.html",
+    "title": "Papers",
+    "section": "",
+    "text": "McInerney, A and Burke, K (2022). A Statistically-Based Approach to Feedforward Neural Network Model Selection. arXiv preprint arXiv:2207.04248. [link]"
+  },
+  {
+    "objectID": "papers.html#conference-proceedings",
+    "href": "papers.html#conference-proceedings",
+    "title": "Papers",
+    "section": "Conference Proceedings",
+    "text": "Conference Proceedings\nMcInerney, A and Burke, K (2022). Statistical Information-Criteria-Based Neural Network Input and Hidden Node Selection. In Proceedings of the 36th International Workshop on Statistical Modelling. [link]"
+  },
+  {
+    "objectID": "standings.html",
+    "href": "standings.html",
+    "title": "Standings",
+    "section": "",
+    "text": "Sweepstake Table\n\n\nTeam Rankings"
+  },
+  {
+    "objectID": "index.html#selections",
+    "href": "index.html#selections",
+    "title": "MACSI World Cup Sweepstake",
+    "section": "Selections",
+    "text": "Selections\nPlease enter your selections in the following Google Form.\nGoogle Form"
+  },
+  {
+    "objectID": "index.html#how-it-works",
+    "href": "index.html#how-it-works",
+    "title": "MACSI World Cup Sweepstake",
+    "section": "How it works",
+    "text": "How it works\nThere are 11 selections required (plus one tie breaker).\nPoints are awarded for each of your selections (described below), and the person with the highest points will win."
+  },
+  {
+    "objectID": "index.html#points",
+    "href": "index.html#points",
+    "title": "MACSI World Cup Sweepstake",
+    "section": "Points",
+    "text": "Points\nPoints are awarded in the following ways:\n\nSelections 1 to 8\n\nGame Points (Group Stages only): 6 points per win, 3 points per draw.\nGoal Points (Whole Tournament): 1 point per goal (incl. extra time). This does not include penalty shootouts.\nTournament Points: Points awarded based on how far the team progresses. Winners = 60 points, Runners-Up = 45 points, eliminated in semi-final = 30 points, eliminated in quarter-final = 20 points, eliminated in last 16 = 10 points, eliminated group stage = 0 points.\n\n\n\nSelections 9 to 11\n\nGroup with highest goals (Selection 9): 15 points for selecting the group with the highest number of goals. If 2 or more groups have the highest number of goals, 5 points will be awarded for selecting any of the groups.\nGoals in Final (Selection 10): 15 points for selecting the correct total number of goals in the final (including extra time, penalty shootout not included).\nGoalscorer (Selection 11): 4 points for every goal scored by your selected goalscorer, not including goal in a penalty shootout. Goalscorer will be decided based on FIFA’s website."
+  },
+  {
+    "objectID": "index.html#rules",
+    "href": "index.html#rules",
+    "title": "MACSI World Cup Sweepstake",
+    "section": "Rules",
+    "text": "Rules\n\nAll 64 games up to and including the final will count for team goals and goalscorer points.\nSelection 9 is only valid for group games.\nSelection 10 is only valid for the final.\nIn the event of a tie-breaker, the closest to the number of goals in the tournament will win. If there is a draw, the pot will be split.\nThe decision of the organizing committee is final.\n\n\nStandings update\nThe standings will be updated shorty after every game. In some cases, the wait time may be longer, but the time of the last update will be available.\nGame Points and Goal Points for selections 1 to 8 will be updated on a per game basis. Tournament Points for selections 1 to 8 will be added once each round has finished. Points for selection 9 will be updated once the group stage has finished. Points for selection 10 will be updated after the final."
+  },
+  {
+    "objectID": "standings.html#team-rankings",
+    "href": "standings.html#team-rankings",
+    "title": "Standings",
+    "section": "Team Rankings",
+    "text": "Team Rankings\n\n\n\n\n \n  \n      \n    Team \n    W \n    D \n    L \n    RP \n    G \n    BP \n    TotalPoints \n  \n \n\n  \n    7 \n    Mexico \n    1 \n    0 \n    0 \n    6 \n    4 \n    0 \n    10 \n  \n  \n    2 \n    England \n    1 \n    0 \n    0 \n    6 \n    3 \n    0 \n    9 \n  \n  \n    3 \n    Senegal \n    1 \n    0 \n    0 \n    6 \n    3 \n    0 \n    9 \n  \n  \n    17 \n    Wales \n    1 \n    0 \n    0 \n    6 \n    3 \n    0 \n    9 \n  \n  \n    8 \n    France \n    1 \n    0 \n    0 \n    6 \n    2 \n    0 \n    8 \n  \n  \n    1 \n    Qatar \n    1 \n    0 \n    0 \n    6 \n    2 \n    0 \n    8 \n  \n  \n    21 \n    Tunisia \n    1 \n    0 \n    0 \n    6 \n    2 \n    0 \n    8 \n  \n  \n    5 \n    Argentina \n    0 \n    1 \n    0 \n    3 \n    1 \n    0 \n    4 \n  \n  \n    40 \n    Saudi Arabia \n    0 \n    1 \n    0 \n    3 \n    1 \n    0 \n    4 \n  \n  \n    22 \n    Poland \n    0 \n    0 \n    1 \n    0 \n    3 \n    0 \n    3 \n  \n  \n    36 \n    Iran \n    0 \n    0 \n    1 \n    0 \n    2 \n    0 \n    2 \n  \n  \n    19 \n    Netherlands \n    0 \n    0 \n    1 \n    0 \n    2 \n    0 \n    2 \n  \n  \n    4 \n    USA \n    0 \n    0 \n    1 \n    0 \n    2 \n    0 \n    2 \n  \n  \n    37 \n    Australia \n    0 \n    0 \n    1 \n    0 \n    1 \n    0 \n    1 \n  \n  \n    33 \n    Ecuador \n    0 \n    0 \n    1 \n    0 \n    1 \n    0 \n    1 \n  \n  \n    12 \n    Belgium \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    16 \n    Brazil \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    29 \n    Cameroon \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    42 \n    Canada \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    44 \n    Costa Rica \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    27 \n    Croatia \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    6 \n    Denmark \n    0 \n    0 \n    1 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    10 \n    Germany \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    45 \n    Ghana \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    25 \n    Japan \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    30 \n    South Korea \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    9 \n    Morocco \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    15 \n    Portugal \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    47 \n    Serbia \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    11 \n    Spain \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    13 \n    Switzerland \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n  \n  \n    14 \n    Uruguay \n    0 \n    0 \n    0 \n    0 \n    0 \n    0 \n    0"
+  }
+]

@@ -1,0 +1,362 @@
+---
+title: "Selections"
+---
+
+```{r, include = FALSE}
+library(readxl)
+library(dplyr)
+library(kableExtra)
+
+# players names
+
+
+names <- c("Drew", "Bob", "Curran", "Sully", "Ray", "Maher", "Shaw", "Chang",
+           "Coady", "Hugh", "Roy", "Pa", "Hanley")
+
+# selections ---------------------------------------------------------------
+
+
+for (name in names) {
+  my_data <- read_excel("files/Wolfpack World Cup Predictor 2022.xlsm", 
+                        sheet = name, col_names = FALSE)
+  
+  
+  # group match  ------------------------------------------------------
+  
+  
+  group_selections <- my_data[, 1:8]
+  
+  remove_ind <- c(1:2, sapply(1:7, \(x) (9 * x):((9 * x) + 2)), 72:73)
+  
+  group_selections <- group_selections[-remove_ind, ]
+  
+  group_selections[, 9] <- ifelse(
+    !is.na(group_selections[, 2]), "Home Win (+2)", 
+    ifelse(!is.na(group_selections[, 3]), "Home Win",
+           ifelse(!is.na(group_selections[, 4]), "Draw",
+                  ifelse(!is.na(group_selections[, 5]), "Away Win",
+                         ifelse(!is.na(group_selections[, 6]), "Away Win (+2)",
+                                "NA"
+                         )))))
+  
+  group_selections <- group_selections[, c(1, 7, 9)]
+  
+  colnames(group_selections) <- c("Home Team", "Away Team", "Prediction")
+  
+  group_selections$`Home Team`[group_selections$`Home Team`
+                             == "Netrherlands"] = "Netherlands"
+  
+  group_selections$`Home Team`[group_selections$`Home Team`
+                             == "Crotia"] = "Croatia"
+  
+  group_selections$`Home Team`[group_selections$`Home Team`
+                             == "IR Iran"] = "Iran"
+  
+  
+  group_selections$`Away Team`[group_selections$`Away Team`
+                             == "Netrherlands"] = "Netherlands"
+  
+  group_selections$`Away Team`[group_selections$`Away Team`
+                             == "Crotia"] = "Croatia"
+  
+  group_selections$`Away Team`[group_selections$`Away Team`
+                             == "IR Iran"] = "Iran"
+  
+  
+  assign(paste0(name, "_selection_gm"), group_selections)
+  
+  
+  
+  # group rank points -------------------------------------------------------
+  
+  group_standings <- my_data[-c(1:2, 7:11, 16:20, 25:29, 34:38, 43:47,
+                                52:56, 61:65, 70:73), 9:10]
+  colnames(group_standings) <- c("Position", "Team")
+  group_standings$Group <- rep(c("A", "B", "C", "D", "E", "F", "G", "H"),
+                               each = 4)
+  assign(paste0(name, "_selection_gs"), group_standings)
+}
+
+
+```
+
+
+## Selections {.tabset}
+
+::: panel-tabset
+## Drew
+
+```{r echo=FALSE}
+Drew_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Drew_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Bob
+
+```{r echo=FALSE}
+Bob_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Bob_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Curran
+
+```{r echo=FALSE}
+Curran_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Curran_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Sully
+
+```{r echo=FALSE}
+Sully_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Sully_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Ray
+
+```{r echo=FALSE}
+Ray_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Ray_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Maher
+
+```{r echo=FALSE}
+Maher_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Maher_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Shaw
+
+```{r echo=FALSE}
+Shaw_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Shaw_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Chang
+
+```{r echo=FALSE}
+Chang_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Chang_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Coady
+
+```{r echo=FALSE}
+Coady_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Coady_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Hugh
+
+```{r echo=FALSE}
+Hugh_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Hugh_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Roy
+
+```{r echo=FALSE}
+Roy_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Roy_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Pa
+
+```{r echo=FALSE}
+Pa_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Pa_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+## Hanley
+
+```{r echo=FALSE}
+Hanley_selection_gm %>%
+  kbl() %>%
+  kable_styling()
+
+Hanley_selection_gs[, c(2, 1)] %>%
+  kbl() %>%
+  kable_styling() %>%
+  pack_rows("Group A", 1, 4) %>%
+  pack_rows("Group B", 5, 8) %>%
+  pack_rows("Group C", 9, 12) %>%
+  pack_rows("Group D", 13, 16) %>%
+  pack_rows("Group E", 17, 20) %>%
+  pack_rows("Group F", 21, 24) %>%
+  pack_rows("Group G", 25, 28) %>%
+  pack_rows("Group H", 29, 32)
+```
+
+
+
+:::
+

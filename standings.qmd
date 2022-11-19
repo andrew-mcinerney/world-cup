@@ -1,0 +1,37 @@
+---
+title: "Standings"
+---
+
+```{r include = FALSE}
+library(readxl)
+library(dplyr)
+library(kableExtra)
+
+# players names
+
+
+names <- c("Drew", "Bob", "Curran", "Sully", "Ray", "Maher", "Shaw", "Chang",
+           "Coady", "Hugh", "Roy", "Pa", "Hanley")
+
+# standings ---------------------------------------------------------------
+
+standings <- data.frame("Name" = names, "Points" = 0)  
+
+standings <- standings[order(standings$Name), ]
+```
+
+
+
+Last updated: `r format(Sys.time())`
+
+### Table 
+
+```{r echo=FALSE}
+row.names(standings) <- NULL
+standings %>%
+  kbl() %>%
+  kable_styling()
+```
+
+
+

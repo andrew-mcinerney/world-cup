@@ -1,0 +1,14 @@
+{
+  "hash": "fdccd758cfbc1ede465da02375077856",
+  "result": {
+    "markdown": "---\ntitle: \"Standings\"\n---\n\n\n\n\n\nLast updated: 2022-11-14 12:43:15\n\n### Sweepstake Table\n\n\n\n### Team Rankings\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

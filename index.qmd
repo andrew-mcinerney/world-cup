@@ -1,0 +1,62 @@
+---
+title: "Wolfpack World Cup Predictor"
+image: wc_logo.png
+about: 
+  template: trestles
+  image-shape: rounded
+  image-width: 15em
+---
+
+## Scoring
+
+#### Group round
+
+-   1 Point awarded for Correctly selecting the Result in the Group stage
+
+-   1 Bonus point awarded if correctly predicting that a team wins by 2 Goals or more
+
+-   1 Point **DEDUCTED** for Incorrectly predicting a team wins by 2 Goals or more
+
+-   1 Point awarded for predicting the finishing Position of teams in Group table
+
+#### Round of 16
+
+-   1 Point awarded for having the correct team in the correct place in the Round
+
+-   1 Point awarded for having the correct team in the Round irrespective of Position
+
+-   2 Points awarded for picking the correct Game Winner irrespective of the Team
+
+#### Quarter
+
+-   2 Points awarded for having the correct team in the correct place in the Round
+
+-   2 Points awarded for having the correct team in the Round irrespective of Position
+
+-   4 Points awarded for picking the correct Game Winner irrespective of the Team
+
+#### Semi
+
+-   4 Points awarded for having the correct team in the correct place in the Round
+
+-   4 Points awarded for having the correct team in the Round irrespective of Position
+
+-   8 Points awarded for picking the correct Game Winner irrespective of the Team
+
+#### Playoff
+
+-   4 Points awarded for having the correct team in the correct place in the Round
+
+-   4 Points awarded for having the correct team in the Round irrespective of Position
+
+-   8 Points awarded for picking the correct Game Winner irrespective of the Team
+
+#### Final
+
+-   8 Points awarded for having the correct team in the correct place in the Round
+
+-   8 Points awarded for having the correct team in the Round irrespective of Position
+
+-   16 Points awarded for picking the correct Winner irrespective of the Team
+
+-   16 Correct World Cup Winner
