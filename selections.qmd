@@ -80,17 +80,23 @@ for (name in names) {
 
 ```
 
-
 ## Selections {.tabset}
 
 ::: panel-tabset
 ## Drew
 
+::: panel-tabset
+## Matches
+
 ```{r echo=FALSE}
 Drew_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
 
+## Group Table
+
+```{r echo=FALSE}
 Drew_selection_gs[, c(2, 1)] %>%
   kbl() %>%
   kable_styling() %>%
@@ -103,14 +109,21 @@ Drew_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Bob
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Bob_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Bob_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -124,14 +137,22 @@ Bob_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Curran
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Curran_selection_gm %>%
   kbl() %>%
   kable_styling()
+
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Curran_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -145,14 +166,21 @@ Curran_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Sully
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Sully_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Sully_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -166,14 +194,21 @@ Sully_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Ray
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Ray_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Ray_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -187,14 +222,21 @@ Ray_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Maher
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Maher_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Maher_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -208,14 +250,21 @@ Maher_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Shaw
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Shaw_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Shaw_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -229,14 +278,21 @@ Shaw_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Chang
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Chang_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Chang_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -250,14 +306,21 @@ Chang_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Coady
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Coady_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Coady_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -271,14 +334,21 @@ Coady_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Hugh
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Hugh_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Hugh_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -292,14 +362,21 @@ Hugh_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Roy
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Roy_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Roy_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -313,14 +390,21 @@ Roy_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Pa
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Pa_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Pa_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -334,14 +418,21 @@ Pa_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
+:::
 
 ## Hanley
+::: panel-tabset
+## Matches
 
 ```{r echo=FALSE}
 Hanley_selection_gm %>%
   kbl() %>%
   kable_styling()
+```
+
+## Group Table
+
+```{r echo=FALSE}
 
 Hanley_selection_gs[, c(2, 1)] %>%
   kbl() %>%
@@ -355,8 +446,5 @@ Hanley_selection_gs[, c(2, 1)] %>%
   pack_rows("Group G", 25, 28) %>%
   pack_rows("Group H", 29, 32)
 ```
-
-
-
 :::
-
+:::

@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Wolfpack World Cup Predictor"
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - href: standings.qmd
+      - href: selections.qmd
+  page-footer: 
+    background: light
+    left: 
+      - "Copyright 2022, Andrew McInerney"
+    right: 
+      - icon: github
+        href: https://github.com/andrew-mcinerney
+      - icon: twitter
+        href: https://twitter.com/andrewmcinerney_
+  reader-mode: true
+
+
+format:
+  html:
+    page-layout: full
+    theme: 
+        light: flatly
+        dark: darkly
+    css: styles.css
+    mainfont: Nunito
+    toc: true
