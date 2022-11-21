@@ -7,8 +7,8 @@ website:
   navbar:
     right:
       - href: index.qmd
-        text: Home
-      - href: standings.qmd
+        text: Standings
+      - href: rules.qmd
       - href: selections.qmd
   page-footer: 
     background: light
