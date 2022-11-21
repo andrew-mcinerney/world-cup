@@ -1,7 +1,6 @@
 library(git2r)
 
-setwd("~/world-cup")
-rmarkdown::render_site()
+system("quarto preview")
 
 gitcommit <- function(msg = "commit from Rstudio", dir = getwd()){
   cmd = sprintf("git commit -m\"%s\"",msg)
