@@ -1,6 +1,6 @@
 library(git2r)
 
-system("quarto preview")
+system("quarto render")
 
 gitcommit <- function(msg = "commit from Rstudio", dir = getwd()){
   cmd = sprintf("git commit -m\"%s\"",msg)
