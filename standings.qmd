@@ -6,6 +6,9 @@ title: "Standings"
 library(readxl)
 library(dplyr)
 library(kableExtra)
+library(worldfootballR)
+library(stringi)
+library(stringr)
 
 # players names
 
@@ -23,6 +26,37 @@ standings <- data.frame("Name" = names)
 
 group_results <- read.csv("files/group-results.csv")
 
+# scrape results ----------------------------------------------------------
+
+# fixtures_results <- read.csv("files/fixtures-results.csv")
+# 
+# results <- fixtures_results[, c(5, 6, 8, 9)]
+# 
+# scraped <- fb_match_results(
+#   country = "", gender = "M", season_end_year = 2022, tier = "",
+#   non_dom_league_url = "https://fbref.com/en/comps/1/history/World-Cup-Seasons")
+# 
+# scraped <- scraped[, c(10, 13, 11, 14)]
+# 
+# 
+# 
+# scraped$Home <- str_trim(str_sub(scraped$Home, start = 1, end = -4))
+# scraped$Away <- str_trim(str_sub(scraped$Away, start = 4))
+# 
+# scraped$Home[scraped$Home == "IR Iran"] = "Iran"
+# scraped$Home[scraped$Home == "United States"] = "USA"
+# scraped$Away[scraped$Away == "IR Iran"] = "Iran"
+# scraped$Away[scraped$Away == "United States"] = "USA"
+# 
+# fixtures_results <- left_join(fixtures_results, scraped, 
+#                 by = c("Home.Team" = "Home", "Away.Team" = "Away"))
+# 
+# fixtures_results$Home.Score <- fixtures_results$HomeGoals
+# fixtures_results$Away.Score <- fixtures_results$AwayGoals
+# 
+# fixtures_results <- fixtures_results[, -c(10, 11)]
+# 
+# write.csv(fixtures_results, "files/fixtures-results.csv", row.names = FALSE)
 
 # fixtures results ---------------------------------------------------------
 
