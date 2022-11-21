@@ -179,7 +179,7 @@ standings <- standings[order(standings$`Total Points`, decreasing = TRUE), ]
 
 Last updated: `r format(Sys.time())`
 
-### Table 
+### Table  
 
 ```{r echo=FALSE}
 row.names(standings) <- NULL
