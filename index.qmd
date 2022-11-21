@@ -7,56 +7,184 @@ about:
   image-width: 15em
 ---
 
-## Scoring
+```{r include = FALSE}
+library(readxl)
+library(dplyr)
+library(kableExtra)
+library(worldfootballR)
+library(stringi)
+library(stringr)
 
-#### Group round
+# players names
 
--   1 Point awarded for Correctly selecting the Result in the Group stage
+names <- c("Drew", "Bob", "Curran", "Sully", "Ray", "Shaw", 
+           "Coady", "Pa", "Hanley")
 
--   1 Bonus point awarded if correctly predicting that a team wins by 2 Goals or more
+# standings ---------------------------------------------------------------
 
--   1 Point **DEDUCTED** for Incorrectly predicting a team wins by 2 Goals or more
+standings <- data.frame("Name" = names)  
 
--   1 Point awarded for predicting the finishing Position of teams in Group table
 
-#### Round of 16
 
--   1 Point awarded for having the correct team in the correct place in the Round
+# group results -----------------------------------------------------------
 
--   1 Point awarded for having the correct team in the Round irrespective of Position
+group_results <- read.csv("files/group-results.csv")
 
--   2 Points awarded for picking the correct Game Winner irrespective of the Team
+# scrape results ----------------------------------------------------------
 
-#### Quarter
+# fixtures_results <- read.csv("files/fixtures-results.csv")
+# 
+# results <- fixtures_results[, c(5, 6, 8, 9)]
+# 
+# scraped <- fb_match_results(
+#   country = "", gender = "M", season_end_year = 2022, tier = "",
+#   non_dom_league_url = "https://fbref.com/en/comps/1/history/World-Cup-Seasons")
+# 
+# scraped <- scraped[, c(10, 13, 11, 14)]
+# 
+# 
+# 
+# scraped$Home <- str_trim(str_sub(scraped$Home, start = 1, end = -4))
+# scraped$Away <- str_trim(str_sub(scraped$Away, start = 4))
+# 
+# scraped$Home[scraped$Home == "IR Iran"] = "Iran"
+# scraped$Home[scraped$Home == "United States"] = "USA"
+# scraped$Away[scraped$Away == "IR Iran"] = "Iran"
+# scraped$Away[scraped$Away == "United States"] = "USA"
+# 
+# fixtures_results <- left_join(fixtures_results, scraped, 
+#                 by = c("Home.Team" = "Home", "Away.Team" = "Away"))
+# 
+# fixtures_results$Home.Score <- fixtures_results$HomeGoals
+# fixtures_results$Away.Score <- fixtures_results$AwayGoals
+# 
+# fixtures_results <- fixtures_results[, -c(10, 11)]
+# 
+# write.csv(fixtures_results, "files/fixtures-results.csv", row.names = FALSE)
 
--   2 Points awarded for having the correct team in the correct place in the Round
+# fixtures results ---------------------------------------------------------
 
--   2 Points awarded for having the correct team in the Round irrespective of Position
+fixtures_results <- read.csv("files/fixtures-results.csv")
 
--   4 Points awarded for picking the correct Game Winner irrespective of the Team
+results <- fixtures_results[!is.na(fixtures_results$Home.Score), c(5, 6, 8, 9)]
 
-#### Semi
+results$Result <- ifelse(
+  results$Home.Score > results$Away.Score + 1, "H2",
+  ifelse(results$Home.Score + 1 < results$Away.Score, "A2",
+         ifelse(results$Home.Score > results$Away.Score, "H",
+                ifelse(results$Home.Score < results$Away.Score, "A",
+                       ifelse(results$Home.Score == results$Away.Score, "D", 
+                              "NA")))))
 
--   4 Points awarded for having the correct team in the correct place in the Round
+results <- results[, c(1, 2, 5)]
 
--   4 Points awarded for having the correct team in the Round irrespective of Position
 
--   8 Points awarded for picking the correct Game Winner irrespective of the Team
+# group selection ----------------------------------------------
 
-#### Playoff
 
--   4 Points awarded for having the correct team in the correct place in the Round
+for (name in names) {
+  my_data <- read_excel("files/Wolfpack World Cup Predictor 2022.xlsm", 
+                        sheet = name, col_names = FALSE)
+  
 
--   4 Points awarded for having the correct team in the Round irrespective of Position
+# group match points ------------------------------------------------------
 
--   8 Points awarded for picking the correct Game Winner irrespective of the Team
+  
+  group_selections <- my_data[, 1:8]
+  
+  remove_ind <- c(1:2, sapply(1:7, \(x) (9 * x):((9 * x) + 2)), 72:73)
+  
+  group_selections <- group_selections[-remove_ind, ]
+  
+  group_selections[, 9] <- ifelse(
+    !is.na(group_selections[, 2]), "H2", 
+    ifelse(!is.na(group_selections[, 3]), "H",
+           ifelse(!is.na(group_selections[, 4]), "D",
+                  ifelse(!is.na(group_selections[, 5]), "A",
+                         ifelse(!is.na(group_selections[, 6]), "A2",
+                                "NA"
+                         )))))
+  
+  group_selections <- group_selections[, c(1, 7, 9)]
+  
+  colnames(group_selections) <- c(colnames(results)[1:2], "Prediction")
+  
+  group_selections$Home.Team[group_selections$Home.Team
+                                 == "Netrherlands"] = "Netherlands"
+  
+  group_selections$Home.Team[group_selections$Home.Team
+                                 == "Crotia"] = "Croatia"
+  
+  group_selections$Home.Team[group_selections$Home.Team
+                                 == "IR Iran"] = "Iran"
+  
+  
+  group_selections$Away.Team[group_selections$Away.Team
+                                 == "Netrherlands"] = "Netherlands"
+  
+  group_selections$Away.Team[group_selections$Away.Team
+                                 == "Crotia"] = "Croatia"
+  
+  group_selections$Away.Team[group_selections$Away.Team
+                                 == "IR Iran"] = "Iran"
+  
+  df <- left_join(group_selections, results, 
+                  by = c("Home.Team", "Away.Team"))
+  
+  df$Points <- ifelse(
+    (df$Prediction == df$Result) & (df$Prediction == "H2" | df$Prediction == "A2"), 2, 
+    ifelse(df$Prediction == df$Result, 1, 
+           ifelse((df$Prediction == "H" & df$Result == "H2") | 
+                    (df$Prediction == "A" & df$Result == "A2"), 1, 
+           ifelse(df$Prediction == "H2" | df$Prediction == "A2", -1, 0
+           ))))
+  
+  assign(name, df)
+  
+  
 
-#### Final
+# group rank points -------------------------------------------------------
 
--   8 Points awarded for having the correct team in the correct place in the Round
+  # group_standings <- my_data[-c(1:2, 7:11, 16:20, 25:29, 34:38, 43:47,
+  #                               52:56, 61:65, 70:73), 9:10]
+  # colnames(group_standings) <- c("Position", "Team")
+  # group_standings$Group <- rep(c("A", "B", "C", "D", "E", "F", "G", "H"),
+  #                              each = 4)
+  # 
+  # colnames(group_results)[1] <- "Result" 
+  # 
+  # df_group <- left_join(group_standings, group_results, 
+  #                       by = c("Team", "Group"))
+  # 
+  # df_group$Points <- ifelse(df_group$Position == df_group$Result, 1, 0)
+  # 
+  # 
 
--   8 Points awarded for having the correct team in the Round irrespective of Position
+# standings ---------------------------------------------------------------
+  standings$GroupPoints1[standings$Name == name] <- sum(df$Points, na.rm = TRUE)
+  
+  
+  # standings$GroupPoints2[standings$Name == name] <- sum(df_group$Points,
+  #                                                    # na.rm = TRUE)
+  
+}
 
--   16 Points awarded for picking the correct Winner irrespective of the Team
+# standings$TotalPoints <- apply(standings[, -1], 1, sum)
+colnames(standings)[2] <- "Total Points"
+standings <- standings[order(standings$`Total Points`, decreasing = TRUE), ]
 
--   16 Correct World Cup Winner
+```
+
+
+
+Last updated: `r format(Sys.time())`
+
+### Table 
+
+```{r echo=FALSE}
+row.names(standings) <- NULL
+standings %>%
+  kbl() %>%
+  kable_styling()
+```
+
