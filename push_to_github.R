@@ -1,7 +1,7 @@
 library(git2r)
 
-system("quarto render selections.qmd")
 system("quarto render index.qmd")
+system("quarto render selections.qmd")
 system("quarto render")
 
 gitcommit <- function(msg = "commit from Rstudio", dir = getwd()){

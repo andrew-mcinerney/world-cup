@@ -1,0 +1,9 @@
+ERROR: No valid input files passed to render
+[1] 1
+ERROR: No valid input files passed to render
+[1] 1
+ERROR: The specified directory ('.') is not a Quarto project
+[1] 1
+Error in git2r::config(user.name = "andrew-mcinerney", user.email = "andrew.mcinerney@ul.ie") : 
+  Unable to locate local repository
+Execution halted
