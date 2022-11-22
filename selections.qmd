@@ -446,7 +446,7 @@ full_selections_result  %>%
   kable_styling() %>%
   pack_rows(index = 
               table(gsub("[1-9].*", "", full_selections_result$Game))[order(
-                order(unique(cbind(full_selections_result$`Home Team`,
+                order(unique(cbind(full_selections_result$Game,
                                    full_selections_result$order))[, 1]))]) %>% 
   row_spec(which(full_selections_result$Points == 2),  background = "green") %>% 
   row_spec(which(full_selections_result$Points == 1),  background = "lightgreen") %>% 
@@ -464,8 +464,8 @@ full_selections_fixtures  %>%
   kable_styling() %>%
   pack_rows(index = 
               table(gsub("[1-9].*", "", full_selections_fixtures$Game))[order(
-                order(unique(cbind(full_selections_fixtures$`Home Team`,
-                                   full_selections_fixtures$order))[, 1]))])
+  order(unique(cbind(full_selections_fixtures$Game,
+                     full_selections_fixtures$order))[, 1]))])
 ```
 
 :::
