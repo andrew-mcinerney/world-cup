@@ -137,9 +137,6 @@ full_selections$Game <- paste0(full_selections$`Home Team`, " v ",
 full_selections_result <- full_selections[!is.na(full_selections$Result),
                                           c(7, 1:4, 6, 8, 5)]
 
-full_selections_result$Game <- paste0(full_selections_result$Game,
-                                      " (", full_selections_result$Result,
-                                      ")")
 
 full_selections_fixtures <- full_selections[is.na(full_selections$Result),
                                           c(7, 1:3, 8, 5)]
@@ -444,7 +441,7 @@ Hanley_selection_gs[, c(2, 1)] %>%
 
 ```{r echo=FALSE}
 full_selections_result  %>%
-  select("Player", "Prediction", "Points") %>% 
+  select("Player", "Prediction", "Result", "Points") %>% 
   kbl(row.names = FALSE) %>%
   kable_styling() %>%
   pack_rows(index = 
