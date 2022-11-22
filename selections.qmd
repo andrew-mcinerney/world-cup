@@ -9,7 +9,6 @@ library(kableExtra)
 
 # players names
 
-
 names <- c("Drew", "Bob", "Curran", "Sully", "Ray", "Shaw", 
            "Coady", "Pa", "Hanley")
 
@@ -52,6 +51,14 @@ for (name in names) {
   group_selections$`Home Team`[group_selections$`Home Team`
                                == "IR Iran"] = "Iran"
   
+  group_selections$`Home Team`[group_selections$`Home Team`
+                               == "Tunsia"] = "Tunisia"
+  
+  group_selections$`Home Team`[group_selections$`Home Team`
+                               == "Switzgerald"] = "Switzerland"
+  
+  
+  
   
   group_selections$`Away Team`[group_selections$`Away Team`
                                == "Netrherlands"] = "Netherlands"
@@ -61,6 +68,12 @@ for (name in names) {
   
   group_selections$`Away Team`[group_selections$`Away Team`
                                == "IR Iran"] = "Iran"
+  
+  group_selections$`Away Team`[group_selections$`Away Team`
+                               == "Tunsia"] = "Tunisia"
+  
+  group_selections$`Away Team`[group_selections$`Away Team`
+                               == "Switzgerald"] = "Switzerland"
   
   fixtures_results <- read.csv("files/fixtures-results.csv")
   
