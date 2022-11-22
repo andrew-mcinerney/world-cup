@@ -55,12 +55,15 @@ Away.score <- sapply(scores, \(x) str_sub(x, start = -1, end = -1))
 
 scraped <- data.frame(Home, Away, Home.score, Away.score)
 
+scraped$Home.score <- ifelse(scraped$Home.score == "v", NA, scraped$Home.score)
+scraped$Away.score <- ifelse(scraped$Away.score == "v", NA, scraped$Away.score)
+
 results <- left_join(results, scraped,
                      by = c("Home.Team" = "Home", "Away.Team" = "Away"))
 
 results[is.na(results$Home.Score) & is.na(results$Away.Score) &
           !is.na(results$Home.score) & !is.na(results$Away.score), c(3, 4)] <-
-
+  
   results[is.na(results$Home.Score) & is.na(results$Away.Score) &
             !is.na(results$Home.score) & !is.na(results$Away.score), c(5, 6)]
 
@@ -187,7 +190,7 @@ standings <- standings[order(standings$`Total Points`, decreasing = TRUE), ]
 
 Last updated: `r format(Sys.time())`
 
-### Table  
+### Table   
 
 ```{r echo=FALSE}
 row.names(standings) <- NULL
