@@ -440,6 +440,9 @@ Hanley_selection_gs[, c(2, 1)] %>%
 ## Full (Results)
 
 ```{r echo=FALSE}
+full_selections_result <- full_selections_result  %>%
+  arrange(desc(order))
+
 full_selections_result  %>%
   select("Player", "Prediction", "Result", "Points") %>% 
   kbl(row.names = FALSE) %>%
@@ -447,11 +450,13 @@ full_selections_result  %>%
   pack_rows(index = 
               table(gsub("[1-9].*", "", full_selections_result$Game))[order(
                 order(unique(cbind(full_selections_result$Game,
-                                   full_selections_result$order))[, 1]))]) %>% 
+                                   full_selections_result$order))[, 1]),
+                decreasing = FALSE)]) %>% 
   row_spec(which(full_selections_result$Points == 2),  background = "green") %>% 
   row_spec(which(full_selections_result$Points == 1),  background = "lightgreen") %>% 
   row_spec(which(full_selections_result$Points == 0),  background = "yellow") %>% 
   row_spec(which(full_selections_result$Points == -1),  background = "red")
+
 ```
 
 
