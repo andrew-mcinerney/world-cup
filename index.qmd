@@ -230,6 +230,6 @@ standings %>%
   kable_styling() %>% 
   footnote(general = "MP = Match Points; BP = Bonus Points; 
            DP = Deducted Points. \n Descriptions can be found in the Rules tab.")
-)
+
 ```
 
