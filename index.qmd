@@ -146,9 +146,11 @@ for (name in names) {
     (df$Prediction == df$Result) & (df$Prediction == "H2" | df$Prediction == "A2"), 2, 
     ifelse(df$Prediction == df$Result, 1, 
            ifelse((df$Prediction == "H" & df$Result == "H2") | 
-                    (df$Prediction == "A" & df$Result == "A2"), 1, 
+                    (df$Prediction == "A" & df$Result == "A2"), 1,
+                  ifelse((df$Prediction == "H2" & df$Result == "H") | 
+                    (df$Prediction == "A2" & df$Result == "A"), 0,
            ifelse(df$Prediction == "H2" | df$Prediction == "A2", -1, 0
-           ))))
+           )))))
   
   assign(name, df)
   

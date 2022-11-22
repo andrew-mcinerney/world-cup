@@ -9,6 +9,7 @@ library(kableExtra)
 
 # players names
 
+
 names <- c("Drew", "Bob", "Curran", "Sully", "Ray", "Shaw", 
            "Coady", "Pa", "Hanley")
 
@@ -82,11 +83,29 @@ for (name in names) {
                                                              "Away.Team" = "Away Team"))
   df$order <- 1:nrow(df)
   
+  df$Result <- ifelse(
+    df$Home.Score > df$Away.Score + 1, "Home Win (+2)",
+    ifelse(df$Home.Score + 1 < df$Away.Score, "Away Win (+2)",
+           ifelse(df$Home.Score > df$Away.Score, "Home Win",
+                  ifelse(df$Home.Score < df$Away.Score, "Away Win",
+                         ifelse(df$Home.Score == df$Away.Score, "Draw", 
+                                "NA")))))
+  
   group_selections <- left_join(group_selections, 
-                                df[, c("Home.Team", "Away.Team", "order")],
+                                df[, c("Home.Team", "Away.Team", "Result", "order")],
                                 by = c("Home Team" = "Home.Team",
                                        "Away Team" = "Away.Team"))
-  group_selections <- group_selections[order(group_selections$order), 1:3]
+  group_selections <- group_selections[order(group_selections$order), 1:4]
+  
+  group_selections$Points <- ifelse(
+    (group_selections$Prediction == group_selections$Result) & (group_selections$Prediction == "Home Win (+2)" | group_selections$Prediction == "Away Win (+2)"), 2, 
+    ifelse(group_selections$Prediction == group_selections$Result, 1, 
+           ifelse((group_selections$Prediction == "Home Win" & group_selections$Result == "Home Win (+2)") | 
+                    (group_selections$Prediction == "Away Win" & group_selections$Result == "Away Win (+2)"), 1,
+                  ifelse((group_selections$Prediction == "Home Win (+2)" & group_selections$Result == "Home Win") | 
+                           (group_selections$Prediction == "Away Win (+2)" & group_selections$Result == "Away Win"), 0,
+                         ifelse(group_selections$Prediction == "Home Win (+2)" | group_selections$Prediction == "Away Win (+2)", -1, 0
+                         )))))
   
   
   assign(paste0(name, "_selection_gm"), group_selections)
@@ -118,7 +137,11 @@ for (name in names) {
 ```{r echo=FALSE}
 Drew_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Drew_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Drew_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Drew_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Drew_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -145,7 +168,11 @@ Drew_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Bob_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Bob_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Bob_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Bob_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Bob_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -173,8 +200,11 @@ Bob_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Curran_selection_gm %>%
   kbl() %>%
-  kable_styling()
-
+  kable_styling()%>% 
+  row_spec(which(Curran_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Curran_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Curran_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Curran_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -202,7 +232,11 @@ Curran_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Sully_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Sully_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Sully_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Sully_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Sully_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -230,7 +264,11 @@ Sully_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Ray_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Ray_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Ray_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Ray_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Ray_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -259,7 +297,11 @@ Ray_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Shaw_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Shaw_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Shaw_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Shaw_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Shaw_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -288,7 +330,11 @@ Shaw_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Coady_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Coady_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Coady_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Coady_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Coady_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -317,7 +363,11 @@ Coady_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Pa_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Pa_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Pa_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Pa_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Pa_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
@@ -345,7 +395,11 @@ Pa_selection_gs[, c(2, 1)] %>%
 ```{r echo=FALSE}
 Hanley_selection_gm %>%
   kbl() %>%
-  kable_styling()
+  kable_styling() %>% 
+  row_spec(which(Hanley_selection_gm$Points == 2),  background = "green") %>% 
+  row_spec(which(Hanley_selection_gm$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(Hanley_selection_gm$Points == 0),  background = "yellow") %>% 
+  row_spec(which(Hanley_selection_gm$Points == -1),  background = "red")
 ```
 
 ## Group Table
