@@ -129,6 +129,12 @@ for (name in names) {
   group_selections$Home.Team[group_selections$Home.Team
                                  == "IR Iran"] = "Iran"
   
+  group_selections$Home.Team[group_selections$Home.Team
+                               == "Tunsia"] = "Tunisia"
+  
+  group_selections$Home.Team[group_selections$Home.Team
+                               == "Switzgerald"] = "Switzerland"
+  
   
   group_selections$Away.Team[group_selections$Away.Team
                                  == "Netrherlands"] = "Netherlands"
@@ -138,6 +144,12 @@ for (name in names) {
   
   group_selections$Away.Team[group_selections$Away.Team
                                  == "IR Iran"] = "Iran"
+  
+  group_selections$Away.Team[group_selections$Away.Team
+                               == "Tunsia"] = "Tunisia"
+  
+  group_selections$Away.Team[group_selections$Away.Team
+                               == "Switzgerald"] = "Switzerland"
   
   df <- left_join(group_selections, results, 
                   by = c("Home.Team", "Away.Team"))
