@@ -6,13 +6,13 @@ title: "Rules"
 
 #### Group round
 
--   1 Point awarded for Correctly selecting the Result in the Group stage
+-   1 Point awarded for Correctly selecting the Result in the Group stage (MP)
 
--   1 Bonus point awarded if correctly predicting that a team wins by 2 Goals or more
+-   1 Bonus point awarded if correctly predicting that a team wins by 2 Goals or more (BP)
 
--   1 Point **DEDUCTED** for Incorrectly predicting a team wins by 2 Goals or more
+-   1 Point **DEDUCTED** for Incorrectly predicting a team wins by 2 Goals or more (DP)
 
--   1 Point awarded for predicting the finishing Position of teams in Group table
+-   1 Point awarded for predicting the finishing Position of teams in Group table (GP)
 
 #### Round of 16
 
