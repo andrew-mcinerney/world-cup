@@ -14,7 +14,9 @@ names <- c("Drew", "Bob", "Curran", "Sully", "Ray", "Shaw",
            "Coady", "Pa", "Hanley")
 
 # selections ---------------------------------------------------------------
-
+full_selections <- data.frame("Home Team" = NA, "Away Team" = NA, 
+                              "Prediction" = NA, "Result" = NA, "order" = NA,
+                              "Points" = NA)
 
 for (name in names) {
   my_data <- read_excel("files/Wolfpack World Cup Predictor 2022.xlsm", 
@@ -95,7 +97,6 @@ for (name in names) {
                                 df[, c("Home.Team", "Away.Team", "Result", "order")],
                                 by = c("Home Team" = "Home.Team",
                                        "Away Team" = "Away.Team"))
-  group_selections <- group_selections[order(group_selections$order), 1:4]
   
   group_selections$Points <- ifelse(
     (group_selections$Prediction == group_selections$Result) & (group_selections$Prediction == "Home Win (+2)" | group_selections$Prediction == "Away Win (+2)"), 2, 
@@ -107,9 +108,12 @@ for (name in names) {
                          ifelse(group_selections$Prediction == "Home Win (+2)" | group_selections$Prediction == "Away Win (+2)", -1, 0
                          )))))
   
+  colnames(full_selections) <- colnames(group_selections)
+  full_selections <- rbind(full_selections, group_selections)
+  
+  group_selections <- group_selections[order(group_selections$order), c(1:4, 6)]
   
   assign(paste0(name, "_selection_gm"), group_selections)
-  
   
   
   # group rank points -------------------------------------------------------
@@ -123,6 +127,22 @@ for (name in names) {
 }
 
 
+full_selections$Player <- c(NA, rep(names, each = 48))
+full_selections <- full_selections[-1, ]
+full_selections <- full_selections[order(full_selections$order), ]
+
+full_selections$Game <- paste0(full_selections$`Home Team`, " v ",
+                               full_selections$`Away Team`)
+
+full_selections_result <- full_selections[!is.na(full_selections$Result),
+                                          c(7, 1:4, 6, 8, 5)]
+
+full_selections_result$Game <- paste0(full_selections_result$Game,
+                                      " (", full_selections_result$Result,
+                                      ")")
+
+full_selections_fixtures <- full_selections[is.na(full_selections$Result),
+                                          c(7, 1:3, 8, 5)]
 
 ```
 
@@ -419,4 +439,36 @@ Hanley_selection_gs[, c(2, 1)] %>%
   pack_rows("Group H", 29, 32)
 ```
 :::
+
+## Full (Results)
+
+```{r echo=FALSE}
+full_selections_result  %>%
+  select("Player", "Prediction", "Points") %>% 
+  kbl(row.names = FALSE) %>%
+  kable_styling() %>%
+  pack_rows(index = 
+              table(gsub("[1-9].*", "", full_selections_result$Game))[order(
+                order(unique(cbind(full_selections_result$`Home Team`,
+                                   full_selections_result$order))[, 1]))]) %>% 
+  row_spec(which(full_selections_result$Points == 2),  background = "green") %>% 
+  row_spec(which(full_selections_result$Points == 1),  background = "lightgreen") %>% 
+  row_spec(which(full_selections_result$Points == 0),  background = "yellow") %>% 
+  row_spec(which(full_selections_result$Points == -1),  background = "red")
+```
+
+
+## Full (Fixtures)
+
+```{r echo=FALSE}
+full_selections_fixtures  %>%
+  select("Player", "Prediction") %>% 
+  kbl(row.names = FALSE) %>%
+  kable_styling() %>%
+  pack_rows(index = 
+              table(gsub("[1-9].*", "", full_selections_fixtures$Game))[order(
+                order(unique(cbind(full_selections_fixtures$`Home Team`,
+                                   full_selections_fixtures$order))[, 1]))])
+```
+
 :::
