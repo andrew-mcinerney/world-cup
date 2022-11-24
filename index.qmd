@@ -58,6 +58,9 @@ scraped <- data.frame(Home, Away, Home.score, Away.score)
 scraped$Home.score <- ifelse(scraped$Home.score == "v", NA, scraped$Home.score)
 scraped$Away.score <- ifelse(scraped$Away.score == "v", NA, scraped$Away.score)
 
+scraped$Home[scraped$Home == "South Korea"] <- "Korea Republic"
+scraped$Away[scraped$Away == "South Korea"] <- "Korea Republic"
+
 results <- left_join(results, scraped,
                      by = c("Home.Team" = "Home", "Away.Team" = "Away"))
 
