@@ -18934,3 +18934,27 @@ List of 1
 output file: selections.knit.md
 
 WARNING: Warning: diff of engine output timed out. No source lines will be available.
+
+Output created: docs\index.html
+
+[1] 0
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .quarto/_freeze/index/execute-results/html.json
+	modified:   docs/index.html
+	modified:   push_to_github.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+warning: LF will be replaced by CRLF in .quarto/_freeze/index/execute-results/html.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in docs/index.html.
+The file will have its original line endings in your working directory
+[main f7dbd9e] commit from Rstudio
+ 3 files changed, 493 insertions(+), 2 deletions(-)
+[1] 0
+To https://github.com/andrew-mcinerney/world-cup.git
+   bbe0ff7..f7dbd9e  main -> main
