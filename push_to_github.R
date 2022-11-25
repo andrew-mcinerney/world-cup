@@ -1,6 +1,6 @@
 library(git2r)
 
-setwd("C:\\Users\\andrew.mcinerney\\Documents\\world-cup")
+setwd("C:\\Users\\andrew.mcinerney\\OneDrive - University of Limerick\\Documents\\R\\world-cup")
 
 system("quarto render index.qmd")
 system("quarto render selections.qmd")
