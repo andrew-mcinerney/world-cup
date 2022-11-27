@@ -190,7 +190,8 @@ assign(paste0(name, "_knockouts"), knockouts_sel)
                          )))))
   
   colnames(full_selections) <- colnames(group_selections)
-  full_selections <- rbind(full_selections, group_selections)
+  full_selections <- rbind(full_selections, group_selections, knockouts)
+
   
   group_selections <- group_selections[order(group_selections$order), c(1:4, 6)]
   
@@ -208,19 +209,34 @@ assign(paste0(name, "_knockouts"), knockouts_sel)
 }
 
 
-full_selections$Player <- c(NA, rep(names, each = 48))
+
+full_selections$Player <- c(NA, rep(names, each = 64))
 full_selections <- full_selections[-1, ]
 full_selections <- full_selections[order(full_selections$order), ]
+
+full_selections$Stage <- c(rep("Group", 48*length(names)),
+                           rep("R16", 8*length(names)),
+                           rep("QF", 4*length(names)),
+                           rep("SF", 2*length(names)),
+                           rep("TP", length(names)),
+                           rep("F", length(names)))
 
 full_selections$Game <- paste0(full_selections$`Home Team`, " v ",
                                full_selections$`Away Team`)
 
+full_selections$Game[full_selections$order > 48] <- paste0(
+  full_selections$Stage[full_selections$order > 48], " (Game ",
+  full_selections$order[full_selections$order > 48], ")")
+
+
+
 full_selections_result <- full_selections[!is.na(full_selections$Result),
-                                          c(7, 1:4, 6, 8, 5)]
+                                          c(7, 1:4, 6, 9, 5)]
 
 
 full_selections_fixtures <- full_selections[is.na(full_selections$Result),
-                                          c(7, 1:3, 8, 5)]
+                                            c(7, 1:3, 8, 5, 9)]
+
 
 ```
 
@@ -708,13 +724,13 @@ full_selections_result  %>%
 
 ```{r echo=FALSE}
 full_selections_fixtures  %>%
-  select("Player", "Prediction") %>% 
+  select("Player", "Prediction", "Home Team", "Away Team") %>% 
   kbl(row.names = FALSE) %>%
   kable_styling() %>%
   pack_rows(index = 
-              table(gsub("[1-9].*", "", full_selections_fixtures$Game))[order(
-  order(unique(cbind(full_selections_fixtures$Game,
-                     full_selections_fixtures$order))[, 1]))])
+              table(gsub("", "", full_selections_fixtures$Game))[order(
+                order(unique(cbind(full_selections_fixtures$Game,
+                                   full_selections_fixtures$order))[, 1]))])
 ```
 
 :::

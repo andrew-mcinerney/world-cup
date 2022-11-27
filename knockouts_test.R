@@ -52,11 +52,21 @@ full_selections$Player <- c(NA, rep(names, each = 64))
 full_selections <- full_selections[-1, ]
 full_selections <- full_selections[order(full_selections$order), ]
 
+full_selections$Stage <- c(rep("Group", 48*length(names)),
+                           rep("R16", 8*length(names)),
+                           rep("QF", 4*length(names)),
+                           rep("SF", 2*length(names)),
+                           rep("TP", length(names)),
+                           rep("F", length(names)))
+
 full_selections$Game <- paste0(full_selections$`Home Team`, " v ",
                                full_selections$`Away Team`)
 
-full_selections$Stage <- c(rep("Group", 48), rep("R16", 8), rep("QF", 4),
-                           rep("SF", 2), "TP", "F")
+full_selections$Game[full_selections$order > 48] <- paste0(
+  full_selections$Stage[full_selections$order > 48], " (Game ",
+  full_selections$order[full_selections$order > 48], ")")
+
+
 
 full_selections_result <- full_selections[!is.na(full_selections$Result),
                                           c(7, 1:4, 6, 8, 5)]
