@@ -28,7 +28,7 @@ standings <- data.frame("Name" = names)
 
 # group results -----------------------------------------------------------
 
-group_results <- read.csv("files/group-results-test.csv")
+group_results <- read.csv("files/group-results.csv")
 
 # scrape results ----------------------------------------------------------
 
