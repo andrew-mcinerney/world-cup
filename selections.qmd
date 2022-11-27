@@ -215,11 +215,11 @@ full_selections <- full_selections[-1, ]
 full_selections <- full_selections[order(full_selections$order), ]
 
 full_selections$Stage <- c(rep("Group", 48*length(names)),
-                           rep("R16", 8*length(names)),
-                           rep("QF", 4*length(names)),
-                           rep("SF", 2*length(names)),
-                           rep("TP", length(names)),
-                           rep("F", length(names)))
+                           rep("Round of 16", 8*length(names)),
+                           rep("Quarter Final", 4*length(names)),
+                           rep("Semi Final", 2*length(names)),
+                           rep("3rd Place Playoff", length(names)),
+                           rep("Final", length(names)))
 
 full_selections$Game <- paste0(full_selections$`Home Team`, " v ",
                                full_selections$`Away Team`)
