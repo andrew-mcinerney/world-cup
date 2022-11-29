@@ -191,6 +191,15 @@ for (name in names) {
   colnames(group_standings) <- c("Position", "Team")
   group_standings$Group <- rep(c("A", "B", "C", "D", "E", "F", "G", "H"),
                                each = 4)
+  
+  group_standings$Team[group_standings$Team
+                               == "Crotia"] = "Croatia"
+  
+  group_standings$Team[group_standings$Team
+                               == "IR Iran"] = "Iran"
+  
+  group_standings$Team[group_standings$Team
+                               == "Cost Rica"] = "Costa Rica"
 
   colnames(group_results)[1] <- "Result"
 
