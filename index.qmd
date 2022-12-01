@@ -288,6 +288,41 @@ for (name in names) {
   knockouts$`Away Team`[knockouts$`Away Team`
                         == "Switzgerald"] = "Switzerland"
   
+  
+  
+    R16$`Home Team`[R16$`Home Team`
+                        == "Netrherlands"] = "Netherlands"
+  
+  R16$`Home Team`[R16$`Home Team`
+                        == "Crotia"] = "Croatia"
+  
+  R16$`Home Team`[R16$`Home Team`
+                        == "IR Iran"] = "Iran"
+  
+  R16$`Home Team`[R16$`Home Team`
+                        == "Tunsia"] = "Tunisia"
+  
+  R16$`Home Team`[R16$`Home Team`
+                        == "Switzgerald"] = "Switzerland"
+  
+  
+  
+  
+  R16$`Away Team`[R16$`Away Team`
+                        == "Netrherlands"] = "Netherlands"
+  
+  R16$`Away Team`[R16$`Away Team`
+                        == "Crotia"] = "Croatia"
+  
+  R16$`Away Team`[R16$`Away Team`
+                        == "IR Iran"] = "Iran"
+  
+  R16$`Away Team`[R16$`Away Team`
+                        == "Tunsia"] = "Tunisia"
+  
+  R16$`Away Team`[R16$`Away Team`
+                        == "Switzgerald"] = "Switzerland"
+  
   knockouts$Result <- NA
   knockouts$Points <- NA
   
