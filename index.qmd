@@ -193,30 +193,30 @@ for (name in names) {
                                each = 4)
   
   group_standings$Team[group_standings$Team
-                               == "Crotia"] = "Croatia"
+                       == "Crotia"] = "Croatia"
   
   group_standings$Team[group_standings$Team
-                               == "IR Iran"] = "Iran"
+                       == "IR Iran"] = "Iran"
   
   group_standings$Team[group_standings$Team
-                               == "Cost Rica"] = "Costa Rica"
-
+                       == "Cost Rica"] = "Costa Rica"
+  
   colnames(group_results)[1] <- "Result"
-
+  
   df_group <- left_join(group_standings, group_results,
                         by = c("Team", "Group"))
-
+  
   df_group$score <- ifelse(df_group$Position == df_group$Result, 1, 0)
   
   df_group_points <- data.frame(Group = c("A", "B", "C", "D", "E", "F", "G", "H"),
                                 Points = NA)
   
   df_group_points$Points <- sapply(df_group_points$Group, \(x)  
-      as.numeric(sum(df_group$score[df_group$Group == x]) == 4))
+                                   as.numeric(sum(df_group$score[df_group$Group == x]) == 4))
   
-
-# round of 16 points ------------------------------------------------------
-
+  
+  # round of 16 points ------------------------------------------------------
+  
   R16 <- my_data[c(3, 8, 13, 18, 23, 28, 33, 38), c(13, 14)]
   
   R16$Prediction <- ifelse(is.na(my_data[c(4, 9, 14, 19, 24, 29, 34, 39), 13]),
@@ -290,38 +290,38 @@ for (name in names) {
   
   
   
-    R16$`Home Team`[R16$`Home Team`
-                        == "Netrherlands"] = "Netherlands"
+  R16$`Home Team`[R16$`Home Team`
+                  == "Netrherlands"] = "Netherlands"
   
   R16$`Home Team`[R16$`Home Team`
-                        == "Crotia"] = "Croatia"
+                  == "Crotia"] = "Croatia"
   
   R16$`Home Team`[R16$`Home Team`
-                        == "IR Iran"] = "Iran"
+                  == "IR Iran"] = "Iran"
   
   R16$`Home Team`[R16$`Home Team`
-                        == "Tunsia"] = "Tunisia"
+                  == "Tunsia"] = "Tunisia"
   
   R16$`Home Team`[R16$`Home Team`
-                        == "Switzgerald"] = "Switzerland"
+                  == "Switzgerald"] = "Switzerland"
   
   
   
   
   R16$`Away Team`[R16$`Away Team`
-                        == "Netrherlands"] = "Netherlands"
+                  == "Netrherlands"] = "Netherlands"
   
   R16$`Away Team`[R16$`Away Team`
-                        == "Crotia"] = "Croatia"
+                  == "Crotia"] = "Croatia"
   
   R16$`Away Team`[R16$`Away Team`
-                        == "IR Iran"] = "Iran"
+                  == "IR Iran"] = "Iran"
   
   R16$`Away Team`[R16$`Away Team`
-                        == "Tunsia"] = "Tunisia"
+                  == "Tunsia"] = "Tunisia"
   
   R16$`Away Team`[R16$`Away Team`
-                        == "Switzgerald"] = "Switzerland"
+                  == "Switzgerald"] = "Switzerland"
   
   knockouts$Result <- NA
   knockouts$Points <- NA
@@ -331,7 +331,15 @@ for (name in names) {
   R16_results <- data.frame(order = c(49:56), Result = NA)
   R16_results$`Home Team` <- group_results$Team[c(1, 9, 5, 13, 17, 25, 21, 29)]
   R16_results$`Away Team` <- group_results$Team[c(6, 14, 2, 10, 22, 30, 18, 26)]
+  R16_results <- left_join(R16_results, scraped,
+                           by = c("Home Team" = "Home", "Away Team" = "Away"))
+  R16_results$Result <- ifelse(R16_results$Home.score > R16_results$Away.score,
+                               "Home Win", 
+                               ifelse(R16_results$Home.score < R16_results$Away.score,
+                                      "Away Win", "Draw"))
   R16_results <- R16_results[, c(3, 4, 2, 1)]
+
+  
   
   R16$Points <- ifelse(is.na(as.numeric(R16$`Home Team` == R16_results$`Home Team`)),
                        0, as.numeric(R16$`Home Team` == R16_results$`Home Team`)) +
@@ -346,7 +354,7 @@ for (name in names) {
            0, as.numeric(R16$`Away Team` %in% c(R16_results$`Home Team`,
                                                 R16_results$`Away Team`))) +
     ifelse(is.na(as.numeric(R16$Prediction == R16_results$Result)), 0,
-           as.numeric(R16$Prediction == R16_results$Result))
+           2*as.numeric(R16$Prediction == R16_results$Result))
   
   R16_points <- sum(R16$`Home Team` == R16_results$`Home Team`, na.rm = TRUE) + 
     sum(R16$`Away Team` == R16_results$`Away Team`, na.rm = TRUE) + 
@@ -354,9 +362,55 @@ for (name in names) {
                                R16_results$`Away Team`), na.rm = TRUE) + 
     sum(R16$`Away Team` %in% c(R16_results$`Home Team`,
                                R16_results$`Away Team`), na.rm = TRUE) +
-    sum(R16$Prediction == R16_results$Result, na.rm = TRUE)
+    2*sum(R16$Prediction == R16_results$Result, na.rm = TRUE)
+  
 
+# QF Points ---------------------------------------------------------------
 
+  
+  QF_results <- data.frame(order = c(57:60), Result = NA)
+  QF_results$`Home Team` <- ifelse(R16_results$Result[c(1, 4, 5, 7)] == "Home Win",
+                                   R16_results$`Home Team`[c(1, 4, 5, 7)],
+                                   R16_results$`Away Team`[c(1, 4, 5, 7)])
+  
+  QF_results$`Away Team` <- ifelse(R16_results$Result[c(2, 3, 6, 8)] == "Home Win",
+                                   R16_results$`Home Team`[c(2, 3, 6, 8)],
+                                   R16_results$`Away Team`[c(2, 3, 6, 8)])
+  
+  QF_results <- left_join(QF_results, scraped,
+                          by = c("Home Team" = "Home", "Away Team" = "Away"))
+  QF_results$Result <- ifelse(QF_results$Home.score > QF_results$Away.score,
+                              "Home Win", 
+                              ifelse(QF_results$Home.score < QF_results$Away.score,
+                                     "Away Win", "Draw"))
+  QF_results <- QF_results[, c(3, 4, 2, 1)]
+  
+  
+  
+  QF$Points <- ifelse(is.na(as.numeric(QF$`Home Team` == QF_results$`Home Team`)),
+                      0, 2*as.numeric(QF$`Home Team` == QF_results$`Home Team`)) +
+    ifelse(is.na(as.numeric(QF$`Away Team` == QF_results$`Away Team`)),
+           0, 2*as.numeric(QF$`Away Team` == QF_results$`Away Team`)) +
+    ifelse(is.na(as.numeric(QF$`Home Team` %in% c(QF_results$`Home Team`,
+                                                  QF_results$`Away Team`))),
+           0, 2*as.numeric(QF$`Home Team` %in% c(QF_results$`Home Team`,
+                                                 QF_results$`Away Team`))) +
+    ifelse(is.na(as.numeric(QF$`Away Team` %in% c(QF_results$`Home Team`,
+                                                  QF_results$`Away Team`))),
+           0, 2*as.numeric(QF$`Away Team` %in% c(QF_results$`Home Team`,
+                                                 QF_results$`Away Team`))) +
+    ifelse(is.na(as.numeric(QF$Prediction == QF_results$Result)), 0,
+           4*as.numeric(QF$Prediction == QF_results$Result))
+  
+  QF_points <- 2*sum(QF$`Home Team` == QF_results$`Home Team`, na.rm = TRUE) + 
+    2*sum(QF$`Away Team` == QF_results$`Away Team`, na.rm = TRUE) + 
+    2*sum(QF$`Home Team` %in% c(QF_results$`Home Team`,
+                                QF_results$`Away Team`), na.rm = TRUE) + 
+    2*sum(QF$`Away Team` %in% c(QF_results$`Home Team`,
+                                QF_results$`Away Team`), na.rm = TRUE) +
+    4*sum(QF$Prediction == QF_results$Result, na.rm = TRUE)
+  
+  
   
   # standings ---------------------------------------------------------------
   standings$MP[standings$Name == name] <- sum(df$MP, na.rm = TRUE)
@@ -365,12 +419,13 @@ for (name in names) {
   standings$GR[standings$Name == name] <- sum(df_group_points$Points,
                                               na.rm = TRUE)
   standings$R16[standings$Name == name] <- sum(R16$Points, na.rm = TRUE)
+  standings$QF[standings$Name == name] <- sum(QF$Points, na.rm = TRUE)
   
 }
 
 standings$`Total Points` <- apply(standings[, -1], 1, sum)
 standings <- standings[order(standings$`Total Points`, decreasing = TRUE), 
-                       ]
+]
 
 ```
 
