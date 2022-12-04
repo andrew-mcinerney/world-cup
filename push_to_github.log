@@ -19670,3 +19670,56 @@ output file: selections.knit.md
 
 WARNING: Warning: diff of engine output timed out. No source lines will be available.
 
+Output created: docs\index.html
+
+[1] 0
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .quarto/_freeze/index/execute-results/html.json
+	modified:   docs/index.html
+	modified:   push_to_github.R
+	modified:   push_to_github.log
+	modified:   task.R
+
+no changes added to commit (use "git add" and/or "git commit -a")
+warning: LF will be replaced by CRLF in .quarto/_freeze/index/execute-results/html.json.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in docs/index.html.
+The file will have its original line endings in your working directory
+[main 9e71ee8] commit from Rstudio
+ 5 files changed, 678 insertions(+), 39 deletions(-)
+[1] 0
+To https://github.com/andrew-mcinerney/world-cup.git
+   99856d9..9e71ee8  main -> main
+
+Attaching package: 'dplyr'
+
+The following object is masked from 'package:git2r':
+
+    pull
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+
+
+processing file: index.qmd
+  |                                                                              |                                                                      |   0%  |                                                                              |..............                                                        |  20%
+  ordinary text without R code
+
+  |                                                                              |............................                                          |  40%
+label: unnamed-chunk-1 (with options) 
+List of 1
+ $ include: logi FALSE
+
+
+^C^C
