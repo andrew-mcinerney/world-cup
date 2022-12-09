@@ -1,13 +1,3 @@
----
-title: "Wolfpack World Cup Predictor"
-image: wc_logo.png
-about: 
-  template: trestles
-  image-shape: rounded
-  image-width: 15em
----
-
-```{r include = FALSE}
 library(readxl)
 library(dplyr)
 library(kableExtra)
@@ -558,22 +548,3 @@ for (name in names) {
 }
 standings$`Total Points` <- apply(standings[, -1], 1, sum)
 standings <- standings[order(standings$`Total Points`, decreasing = TRUE), ]
-
-```
-
-
-
-Last updated: `r format(Sys.time())`
-
-### Table   
-
-```{r echo=FALSE}
-row.names(standings) <- NULL
-standings %>%
-  kbl() %>%
-  kable_styling() %>% 
-  footnote(general = "MP = Match Points; BP = Bonus Points; 
-           DP = Deducted Points; GR = Group Ranking Points \n Descriptions can be found in the Rules tab.")
-
-```
-
