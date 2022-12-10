@@ -420,12 +420,13 @@ for (name in names) {
   QF_results <- left_join(QF_results, scraped,
                           by = c("Home.Team" = "Home", "Away.Team" = "Away")
   )
-  QF_results$Result <- ifelse(QF_results$Home.score > QF_results$Away.score,
+  QF_results$Result <- ifelse(!is.na(QF_results$Result), QF_results$Result,
+    ifelse(QF_results$Home.score > QF_results$Away.score,
                               "Home Win",
                               ifelse(QF_results$Home.score < QF_results$Away.score,
                                      "Away Win", "Draw"
                               )
-  )
+  ))
   QF_results <- QF_results[, c(3, 4, 2, 1)]
   
   write.csv(QF_results, "files/QF_results.csv", row.names = FALSE)
@@ -545,6 +546,7 @@ for (name in names) {
   )
   standings$R16[standings$Name == name] <- sum(R16$Points, na.rm = TRUE)
   standings$QF[standings$Name == name] <- sum(QF$Points, na.rm = TRUE)
+  standings$SF[standings$Name == name] <- sum(SF$Points, na.rm = TRUE)
 }
 standings$`Total Points` <- apply(standings[, -1], 1, sum)
 standings <- standings[order(standings$`Total Points`, decreasing = TRUE), ]
