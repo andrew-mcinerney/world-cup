@@ -321,6 +321,7 @@ for (name in names) {
   )
   F_TP$Game <- c(64, 63)
   F_TP$Stage <- c("F", "TP")
+  F_TP_full <- F_TP
   colnames(R16) <- colnames(QF) <- colnames(SF) <- colnames(F_TP) <-
     c("Home Team", "Away Team", "Prediction", "order", "Stage")
   knockouts <- rbind(R16, QF, SF, F_TP)
@@ -493,20 +494,25 @@ for (name in names) {
                                    QF_results$`Away.Team`[c(2, 4)]
   )
   
-  # SF_results <- read.csv("files/SF_results.csv")
+  SF_results <- read.csv("files/SF_results.csv")
+  
+  colnames(SF_results)[1:2] <- c("Away Team", "Home Team")
   
   SF_results <- left_join(SF_results, scraped,
                           by = c("Home Team" = "Home", "Away Team" = "Away")
   )
-  SF_results$Result <- ifelse(SF_results$Home.score > SF_results$Away.score,
+  
+
+  SF_results$Result <- ifelse(!is.na(SF_results$Result), SF_results$Result,
+                              ifelse(SF_results$Home.score > SF_results$Away.score,
                               "Home Win",
                               ifelse(SF_results$Home.score < SF_results$Away.score,
                                      "Away Win", "Draw"
                               )
-  )
-  SF_results <- SF_results[, c(3, 4, 2, 1)]
+  ))
+  SF_results <- SF_results[, 1:4]
   
-  # write.csv(SF_results, "files/SF_results.csv", row.names = FALSE)
+  write.csv(SF_results, "files/SF_results.csv", row.names = FALSE)
   
   
   SF$Points <- ifelse(is.na(as.numeric(SF$`Home Team` == SF_results$`Home Team`)),
@@ -547,6 +553,74 @@ for (name in names) {
       SF_results$`Away Team`
     ), na.rm = TRUE) +
     8 * sum(SF$Prediction == SF_results$Result, na.rm = TRUE)
+  
+  # F Points ---------------------------------------------------------------
+  F_results <- data.frame(order = c(64), Result = NA)
+  F_results$`Home Team` <- ifelse(SF_results$Result[1] == "Home Win",
+                                   SF_results$`Home Team`[c(1)],
+                                   SF_results$`Away Team`[c(1)]
+  )
+  F_results$`Away Team` <- ifelse(SF_results$Result[c(2)] == "Home Win",
+                                   SF_results$`Home Team`[c(2)],
+                                   SF_results$`Away Team`[c(2)]
+  )
+  
+  # SF_results <- read.csv("files/SF_results.csv")
+  
+  F_results <- left_join(F_results, scraped,
+                          by = c("Home Team" = "Home", "Away Team" = "Away")
+  )
+  F_results$Result <- ifelse(F_results$Home.score > F_results$Away.score,
+                              "Home Win",
+                              ifelse(F_results$Home.score < F_results$Away.score,
+                                     "Away Win", "Draw"
+                              )
+  )
+  F_results <- F_results[, c(3, 4, 2, 1)]
+  
+  # write.csv(SF_results, "files/SF_results.csv", row.names = FALSE)
+  colnames(F_TP_full)[1:2] <- c("Home Team", "Away Team")
+  
+  F_TP <- F_TP_full[1, ]
+  
+  F_TP$Points <- ifelse(is.na(as.numeric(F_TP$`Home Team` == F_results$`Home Team`)),
+                      0, 8 * as.numeric(F_TP$`Home Team` == F_results$`Home Team`)
+  ) +
+    ifelse(is.na(as.numeric(F_TP$`Away Team` == F_results$`Away Team`)),
+           0, 8 * as.numeric(F_TP$`Away Team` == F_results$`Away Team`)
+    ) +
+    ifelse(is.na(as.numeric(F_TP$`Home Team` %in% c(
+      F_results$`Home Team`,
+      F_results$`Away Team`
+    ))),
+    0, 8 * as.numeric(F_TP$`Home Team` %in% c(
+      F_results$`Home Team`,
+      F_results$`Away Team`
+    ))
+    ) +
+    ifelse(is.na(as.numeric(F_TP$`Away Team` %in% c(
+      F_results$`Home Team`,
+      F_results$`Away Team`
+    ))),
+    0, 8 * as.numeric(F_TP$`Away Team` %in% c(
+      F_results$`Home Team`,
+      F_results$`Away Team`
+    ))
+    ) +
+    ifelse(is.na(as.numeric(F_TP$Prediction == F_results$Result)), 0,
+           16 * as.numeric(F_TP$Prediction == F_results$Result)
+    )
+  F_TP_points <- 8 * sum(F_TP$`Home Team` == F_results$`Home Team`, na.rm = TRUE) +
+    8 * sum(F_TP$`Away Team` == F_results$`Away Team`, na.rm = TRUE) +
+    8 * sum(F_TP$`Home Team` %in% c(
+      F_results$`Home Team`,
+      F_results$`Away Team`
+    ), na.rm = TRUE) +
+    8 * sum(F_TP$`Away Team` %in% c(
+      F_results$`Home Team`,
+      F_results$`Away Team`
+    ), na.rm = TRUE) +
+    16 * sum(F_TP$Prediction == F_results$Result, na.rm = TRUE)
   # standings ---------------------------------------------------------------
   standings$MP[standings$Name == name] <- sum(df$MP, na.rm = TRUE)
   standings$BP[standings$Name == name] <- sum(df$BP, na.rm = TRUE)
@@ -557,6 +631,7 @@ for (name in names) {
   standings$R16[standings$Name == name] <- sum(R16$Points, na.rm = TRUE)
   standings$QF[standings$Name == name] <- sum(QF$Points, na.rm = TRUE)
   standings$SF[standings$Name == name] <- sum(SF$Points, na.rm = TRUE)
+  standings$Final[standings$Name == name] <- sum(F_TP$Points, na.rm = TRUE)
 }
 standings$`Total Points` <- apply(standings[, -1], 1, sum)
 standings <- standings[order(standings$`Total Points`, decreasing = TRUE), ]
